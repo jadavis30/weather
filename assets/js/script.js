@@ -2,10 +2,10 @@
 
 //global variables
 var cityNameEl = document.querySelector("#current-city-name");
-
 var cityTempEl = document.querySelector("#current-city-temp");
 var cityHumidityEl = document.querySelector("#current-city-hum");
 var cityWindSpeedEl = document.querySelector("#current-city-wind");
+var cityUvIndexEl = document.querySelector("#current-city-uv");
 
 //prevent enter from reloading page
 
@@ -42,7 +42,7 @@ function findCity() {
     })
     .then (function(uvResponse) {
         var uvIndex = uvResponse.value;
-        
+        cityUvIndexEl.innerHTML = "<p>" + "UV Index: " + uvIndex + "</p>"; 
     })
     
 };
