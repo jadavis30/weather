@@ -21,12 +21,12 @@ function findCity() {
     .then(function(weatherResponse) {
         console.log(weatherResponse);
         var namedCity = weatherResponse.name;
-        var weatherGraphic = weatherResponse.weather[0].id;
+        var weatherGraphic = weatherResponse.weather[0].icon;
         var namedTemp = weatherResponse.main.temp;
         var namedHumidity = weatherResponse.main.humidity;
         var namedWindSpeed = weatherResponse.wind.speed;
         //display items for current city
-        cityNameEl.innerHTML = "<h2>" + namedCity + weatherGraphic + "</h2>";
+        cityNameEl.innerHTML = "<h2>" + namedCity + "<img src= http://openweathermap.org/img/wn/" + weatherGraphic + ".png>" + "</h2>";
         cityTempEl.innerHTML = "<p>" + "Temperature: " + namedTemp + "&#176;F" + "</p>";
         cityHumidityEl.innerHTML = "<p>" + "Humidity: " + namedHumidity + "%" + "</p>";
         cityWindSpeedEl.innerHTML = "<p>" + "Wind Speed: " + namedWindSpeed + " MPH" + "</p>";
