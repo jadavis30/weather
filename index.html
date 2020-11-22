@@ -11,37 +11,83 @@
     <header>
         <h1 class="bg-dark text-white text-center">Weather Dashboard</h1>
     </header>
-    <!--div element for search function and history-->
-    <section class="bg-light text-black text-left col-4">
-        <h2>Search for a City:</h2>
-        <div>
-            <form>
-                <input type="text" id="cityName" name="cityName" value="Anywhere, USA">
-                <button type="button" class="btn-lg btn-primary"> 
-                <span class="fas fa-search-location"></span>   
-            </form>
-        </div>
-        <div class="search-history"></div>
-    </section>  
-        <!--Current Weather Card-->
-        <div class="col-8" >
-        </div>   
-        <!--5-Day Forecast-->
-        <div>
-            <h2>5-Day Historical Data</h2>
-            <!--Day 1-->
-            <div></div>
-            <!--Day 2-->
-            <div></div>
-            <!--Day 3-->
-            <div></div>
-            <!--Day 4-->
-            <div></div>
-            <!--Day 5-->
-            <div></div>
-        </div>
-    
-    <footer>Brought to you by JaDavis30</footer>
+    <section id="weather-wrapper" class="container-fluid" style="display: flex;">
+        <!--div element for search function and history-->
+        <section class="bg-light text-black text-left col-4">
+            <div</div>
+            <h2>Search for a City:</h2>
+            <div>
+                <form>
+                    <input type="text" id="cityName" name="cityName" value="Anywhere, USA">
+                    <button type="button" class="btn-lg btn-primary fas fa-search-location" onclick="findCity()"> 
+                    </button>   
+                </form>
+            </div>
+            <div id="search-history" class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Previously Searched Locations
+                </div>
+                <ul class="list-group list-group-flush">
+                    <!--items loaded first from localstorage and appended after search event-->
+                </ul>    
+            </div>
+        </section>
+        <section class="col-8">
+            <!--Current Weather Card-->
+            <div id="searched-city" class="card bg-light border-dark" style="width: 100%;">
+                <div class="card-body">
+                    <div class="card-title"><!--fetch and push searched city + date + weather symbol here--></div>
+                    <p class="card-text"><!--Temp--></p>
+                    <p class="card-text"><!--Humidity--></p>
+                    <p class="card-text"><!--Wind Speed--></p>
+                    <p class="card-text"><!--UV Index + card coded to color--></p>
+                </div>
+            </div>   
+            <!--5-Day Forecast-->
+            <div>
+                <h2>5-Day Historical Data</h2>
+                <!--5-Day Card Wrapper-->
+                <section class="card-deck" style="display: flex;">
+                <!--Day 1-->
+                <div id="day-one" class="card text-white bg-info col-1" style="">
+                    <div class="card-title"><!--fetch and push date--></div>
+                    <p id="one-symbol" class="card-text"></p>
+                    <p id="one-temp" class="card-text"><!--Temp--></p>
+                    <p id="one-hum" class="card-text"><!--Humidity--></p>
+                </div>
+                <!--Day 2-->
+                <div id="day-two" class="card text-white bg-info col-1" style="">
+                    <div class="card-title"><!--fetch and push date--></div>
+                    <p id="two-symbol" class="card-text"></p>
+                    <p id="two-temp" class="card-text"><!--Temp--></p>
+                    <p id="two-hum" class="card-text"><!--Humidity--></p>    
+                </div>
+                <!--Day 3-->
+                <div id="day-three" class="card text-white bg-info col-1" style="">
+                    <div class="card-title"><!--fetch and push date--></div>
+                    <p id="three-symbol" class="card-text"></p>
+                    <p id="three-temp" class="card-text"><!--Temp--></p>
+                    <p id="three-hum" class="card-text"><!--Humidity--></p>       
+                </div>
+                <!--Day 4-->
+                <div id="day-four" class="card text-white bg-info col-1" style="">
+                    <div class="card-title"><!--fetch and push searched date--></div>
+                    <p id="four-symbol" class="card-text"></p>
+                    <p id="four-temp"class="card-text"><!--Temp--></p>
+                    <p id="four-hum" class="card-text"><!--Humidity--></p>  
+                </div>
+                <!--Day 5-->
+                <div id="day-five" class="card text-white bg-info col-1" style="">
+                    <div class="card-title"><!--fetch and push searched date--></div>
+                    <p id="five-symbol" class="card-text"></p>
+                    <p id="five-temp" class="card-text"><!--Temp--></p>
+                    <p id="five-hum" class="card-text"><!--Humidity--></p>
+                </div>
+            </section>
+            </div>
+        </section>      
+    </section>
+    <footer class="text-align:text-center">Brought to you by Jared Davis</footer>
     
     <script src="assets/js/script.js"></script>
 </body>
