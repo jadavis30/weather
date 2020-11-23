@@ -57,6 +57,7 @@ function renderCities(list) {
     for (var i = 0; i < list.length; i++) {
         var previousItem = $("<p>");
         previousItem.text(list[i]);
+        previousItem.addClass("list-group list-group flush bg-light border")
         $("#cityNames").append(previousItem);
     }
 }
