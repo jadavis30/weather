@@ -47,6 +47,34 @@ function findCity() {
     
 };
 
+//setting searched cities to localstorage
+var list = JSON.parse(localStorage.getItem("prevCities")) || [];
+
+function renderCities(list) {
+    $("#cityNames").empty();
+    
+    //iterate over list
+    for (var i = 0; i < list.length; i++) {
+        var previousItem = $("<p>");
+        previousItem.text(list[i]);
+        $("#cityNames").append(previousItem);
+    }
+}
+
+$("#search-for").on("click", function(event) {
+    event.preventDefault();
+    var previousItem = $("#cityNames").val().trim();
+    list.push(previousItem);
+    renderCities(list);
+    localStorage.setItem("prevCities", JSON.stringify(list));
+    $("#cityNames").val("");
+});
+renderCities(list);
+//changing color of UV based on number:
+
+
+
+
 //appending data to Current Weather Card
 //for symbol: weather.0.icon:
 //for temp main.temp:

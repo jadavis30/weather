@@ -21,7 +21,7 @@
             <div>
                 <form>
                     <input type="text" id="cityName" name="cityName" value="Jacksonville"/>
-                    <button type="button" class="btn-lg btn-primary fas fa-search-location" onclick="findCity()"> 
+                    <button type="button" id="search-for" class="btn-lg btn-primary fas fa-search-location" onclick="findCity()"> 
                     </button>   
                 </form>
             </div>
@@ -29,7 +29,7 @@
                 <div class="card-header">
                     Previously Searched Locations
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul id="cityNames" class="list-group list-group-flush">
                     <!--items loaded first from localstorage and appended after search event-->
                 </ul>    
             </div>
@@ -93,7 +93,8 @@
     </section>
     <footer class="text-align:text-center">Brought to you by Jared Davis and OpenWeather</footer>
     
-    <script src="assets/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-</body>
+    <script src="assets/js/script.js"></script>
+    </body>
 </html>
