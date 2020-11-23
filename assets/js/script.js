@@ -57,18 +57,18 @@ function renderCities(list) {
     for (var i = 0; i < list.length; i++) {
         var previousItem = $("<p>");
         previousItem.text(list[i]);
-        previousItem.addClass("list-group list-group flush bg-light border")
+        previousItem.addClass("list-group list-group flush bg-light border text-center")
         $("#cityNames").append(previousItem);
     }
 }
 
 $("#search-for").on("click", function(event) {
     event.preventDefault();
-    var previousItem = $("#cityNames").val().trim();
+    var previousItem = $("#cityName").val().trim();
     list.push(previousItem);
     renderCities(list);
     localStorage.setItem("prevCities", JSON.stringify(list));
-    $("#cityNames").val("");
+    $("#cityName").val("");
 });
 renderCities(list);
 //changing color of UV based on number:
