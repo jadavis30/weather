@@ -1,5 +1,3 @@
-//moment.js for today's date
-
 //global variables
 var cityNameEl = document.querySelector("#current-city-name");
 var cityTempEl = document.querySelector("#current-city-temp");
@@ -41,12 +39,12 @@ function renderCities(list) {
         $("#cityNames").append(previousItem);
     }
 }
-
+//click event for localstorage
 $("body").on("click", ".previous-search-item", function(event) {
    var cityName= $(this).text();
    forecastCityData(cityName);
 });
-
+//creating localstorage list
 $("#search-for").on("click", function(event) {
     event.preventDefault();
     var previousItem = $("#cityName").val().trim();
@@ -56,15 +54,13 @@ $("#search-for").on("click", function(event) {
     $("#cityName").val("");
 });
 renderCities(list);
-//changing color of UV based on number:
 
-//fetch and push forecast data
-
+//pulling function items out of cityData to allow localstorage to search previous cities
 function forecastSearchData() {
     var searchTerm = document.getElementById("cityName").value;
     forecastCityData(searchTerm);
 }
-
+//creating forecast data to get lat/long
 function forecastCityData(city) {
     document.getElementById("daily-forecast").innerHTML = "";
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + appId)
@@ -94,7 +90,7 @@ function forecastCityData(city) {
         })    
     })    
 }
-
+//creating current forecast card
 function renderCurrentForecast(namedCity, currentForecast) {
     var weatherGraphic = currentForecast.weather[0].icon;
     var namedTemp = currentForecast.temp;
@@ -103,13 +99,14 @@ function renderCurrentForecast(namedCity, currentForecast) {
     var uvIndex = currentForecast.uvi;
         
     //display items for current city
-    cityNameEl.innerHTML = "<h2>" + namedCity + getWeatherIconImg(weatherGraphic) + "</h2>";
+    cityNameEl.innerHTML = "<h2>" + namedCity + convertUnixTime(currentForecast.dt) + getWeatherIconImg(weatherGraphic) + "</h2>";
     cityTempEl.innerHTML = "<p>" + "Temperature: " + namedTemp + "&#176;F" + "</p>";
     cityHumidityEl.innerHTML = "<p>" + "Humidity: " + namedHumidity + "%" + "</p>";
     cityWindSpeedEl.innerHTML = "<p>" + "Wind Speed: " + namedWindSpeed + " MPH" + "</p>";
     cityUvIndexEl.innerHTML = renderUvIndex(uvIndex);
 }
 
+//color coding UV Index
 function renderUvIndex(uvi) {
     if(uvi <=5) {
         return "<span class='badge badge-success'>" + "UV Index: " + uvi + "</span>";
@@ -121,7 +118,7 @@ function renderUvIndex(uvi) {
         return "<span class='badge badge-danger'>" + "UV Index: " + uvi + "</span>";
     }
 }
-
+//dynamically creating div elements for 5-day forecast
 function renderFutureForecast(futureForecast) {
     var cardDivEl = document.createElement("div");
     cardDivEl.classList.add("card", "text-white", "bg-info");
@@ -147,34 +144,11 @@ function renderFutureForecast(futureForecast) {
     cardDivEl.appendChild(divEl);
     dailyForecastEl.appendChild(cardDivEl);
 }
-
+//separate function for weather icon
 function getWeatherIconImg(name) {
     return "<img src= http://openweathermap.org/img/wn/" + name + ".png>"
 }
 //converting universal time into usable JavaScript time, multiply by 1000 to get miliseconds for needed date
 function convertUnixTime(timestamp) {
     return new Date(timestamp*1000).toLocaleDateString();
-}     
-        //var date = forecastResponse.list[i].dt_txt;
-        //var weatherGraphic = forecastResponse.weather[i].icon;
-        //var namedTemp = forecastResponse.main.temp;
-        //var namedHumidity = forecastResponse.main.humidity;
-
-        //dateEl.innerHTML = "<h2>" + date + "<img src= http://openweathermap.org/img/wn/" + weatherGraphic + ".png>" + "</h2>";
-        //weatherGraphic.innerHTML = "<p>" + "Temperature: " + namedTemp + "&#176;F" + "</p>";
-        //namedTemp.innerHTML = "<p>" + "Humidity: " + namedHumidity + "%" + "</p>";
-        //namedHumidity.innerHTML = "<p>" + "Wind Speed: " + namedWindSpeed + " MPH" + "</p>";
-        
-        //iterate over each day
-       /* for (var i = 0; i < list.length; i++) {
-            var previousItem = $("<p>");
-            previousItem.text(list[i]);
-            previousItem.addClass("list-group list-group flush bg-light border text-center")
-            $("#cityNames").append(previousItem);
-        }
-    
-//appending data to Current Weather Card
-//for symbol: weather.0.icon:
-//for temp main.temp:
-//for hum: main.humidity:
-//for wind speed: main.wind*/
+}
