@@ -21,7 +21,7 @@
             <div>
                 <form>
                     <input type="text" id="cityName" name="cityName" value="Jacksonville"/>
-                    <button type="button" id="search-for" class="btn-lg btn-primary fas fa-search-location" onclick="findCity()"> 
+                    <button type="button" id="search-for" class="btn-lg btn-primary fas fa-search-location" onclick="findCity(), forecastData()"> 
                     </button>   
                 </form>
             </div>
@@ -37,7 +37,7 @@
         <section class="col-8">
             
             <!--Current Weather Card-->
-            <div id="searched-city" class="card bg-light border-dark" style="width: 100%;">
+            <div id="searched-city" class="card bg-info border-dark" style="width: 100%;">
                 <div class="card-body">
                     <div id="current-city-name" class="card-title"><!--fetch and push searched city + date + weather symbol here--></div>
                     <div id="current-city-temp" class="card-text"><!--Temp--></div>
@@ -54,7 +54,7 @@
                 <section class="card-deck" style="display: flex;">
                 <!--Day 1-->
                 <div id="day-one" class="card text-white bg-info col-1" style="width: auto;">
-                    <div class="card-title"><!--fetch and push date--></div>
+                    <div id= "one-date" class="card-title"><!--fetch and push date--></div>
                     <p id="one-symbol" class="card-text"></p>
                     <p id="one-temp" class="card-text"><!--Temp--></p>
                     <p id="one-hum" class="card-text"><!--Humidity--></p>
@@ -91,7 +91,7 @@
             </div>
         </section>      
     </section>
-    <footer class="text-align:text-center">Brought to you by Jared Davis and OpenWeather</footer>
+    <footer class="text-center">Brought to you by Jared Davis and OpenWeather API</footer>
     
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>

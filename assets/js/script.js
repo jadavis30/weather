@@ -6,6 +6,8 @@ var cityTempEl = document.querySelector("#current-city-temp");
 var cityHumidityEl = document.querySelector("#current-city-hum");
 var cityWindSpeedEl = document.querySelector("#current-city-wind");
 var cityUvIndexEl = document.querySelector("#current-city-uv");
+var forecastDateEl = document.querySelector("#one-date");
+
 
 //prevent enter from reloading page
 
@@ -19,7 +21,6 @@ function findCity() {
         return weatherResponse.json();
     })
     .then(function(weatherResponse) {
-        console.log(weatherResponse);
         var namedCity = weatherResponse.name;
         var weatherGraphic = weatherResponse.weather[0].icon;
         var namedTemp = weatherResponse.main.temp;
@@ -40,7 +41,7 @@ function findCity() {
     .then(function(uvResponse) {
         return uvResponse.json();
     })
-    .then (function(uvResponse) {
+    .then(function(uvResponse) {
         var uvIndex = uvResponse.value;
         cityUvIndexEl.innerHTML = "<p>" + "UV Index: " + uvIndex + "</p>"; 
     })
@@ -73,11 +74,39 @@ $("#search-for").on("click", function(event) {
 renderCities(list);
 //changing color of UV based on number:
 
+//fetch and push forecast data
 
+function forecastData() {
+    var forecast = JSON.parse(localStorage.getItem("prevCities")) || [];
+    var searchTerm = document.getElementById("cityName").value;
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial" + "&appid=221098603a041dd7e688a833d2e946ac")
+    .then(function(forecastResponse) {
+        return forecastResponse.json();
+    })
+    .then(function(forecastResponse) {
+        console.log(forecastResponse);
+        
+        var date = forecastResponse.list[i].dt_txt;
+        var weatherGraphic = forecastResponse.weather[i].icon;
+        var namedTemp = forecastResponse.main.temp;
+        var namedHumidity = forecastResponse.main.humidity;
 
-
+        dateEl.innerHTML = "<h2>" + date + "<img src= http://openweathermap.org/img/wn/" + weatherGraphic + ".png>" + "</h2>";
+        weatherGraphic.innerHTML = "<p>" + "Temperature: " + namedTemp + "&#176;F" + "</p>";
+        namedTemp.innerHTML = "<p>" + "Humidity: " + namedHumidity + "%" + "</p>";
+        namedHumidity.innerHTML = "<p>" + "Wind Speed: " + namedWindSpeed + " MPH" + "</p>";
+    });
+}        
+        //iterate over each day
+        for (var i = 0; i < list.length; i++) {
+            var previousItem = $("<p>");
+            previousItem.text(list[i]);
+            previousItem.addClass("list-group list-group flush bg-light border text-center")
+            $("#cityNames").append(previousItem);
+        }
+    
 //appending data to Current Weather Card
 //for symbol: weather.0.icon:
 //for temp main.temp:
 //for hum: main.humidity:
-//for wind speed: main.wind:
+//for wind speed: main.wind*/
