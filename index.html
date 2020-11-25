@@ -21,7 +21,7 @@
             <div>
                 <form>
                     <input type="text" id="cityName" name="cityName" value="Jacksonville"/>
-                    <button type="button" id="search-for" class="btn-lg btn-primary fas fa-search-location" onclick="findCity(), forecastData()"> 
+                    <button type="button" id="search-for" class="btn-lg btn-primary fas fa-search-location" onclick="forecastData()"> 
                     </button>   
                 </form>
             </div>
@@ -51,43 +51,8 @@
             <div>
                 <h2>5-Day Forecast</h2>
                 <!--5-Day Card Wrapper-->
-                <section class="card-deck" style="display: flex;">
-                <!--Day 1-->
-                <div id="day-one" class="card text-white bg-info col-1" style="width: auto;">
-                    <div id= "one-date" class="card-title"><!--fetch and push date--></div>
-                    <p id="one-symbol" class="card-text"></p>
-                    <p id="one-temp" class="card-text"><!--Temp--></p>
-                    <p id="one-hum" class="card-text"><!--Humidity--></p>
+                <div id="daily-forecast" class="card-deck">
                 </div>
-                <!--Day 2-->
-                <div id="day-two" class="card text-white bg-info col-1" style="">
-                    <div class="card-title"><!--fetch and push date--></div>
-                    <p id="two-symbol" class="card-text"></p>
-                    <p id="two-temp" class="card-text"><!--Temp--></p>
-                    <p id="two-hum" class="card-text"><!--Humidity--></p>    
-                </div>
-                <!--Day 3-->
-                <div id="day-three" class="card text-white bg-info col-1" style="">
-                    <div class="card-title"><!--fetch and push date--></div>
-                    <p id="three-symbol" class="card-text"></p>
-                    <p id="three-temp" class="card-text"><!--Temp--></p>
-                    <p id="three-hum" class="card-text"><!--Humidity--></p>       
-                </div>
-                <!--Day 4-->
-                <div id="day-four" class="card text-white bg-info col-1" style="">
-                    <div class="card-title"><!--fetch and push searched date--></div>
-                    <p id="four-symbol" class="card-text"></p>
-                    <p id="four-temp"class="card-text"><!--Temp--></p>
-                    <p id="four-hum" class="card-text"><!--Humidity--></p>  
-                </div>
-                <!--Day 5-->
-                <div id="day-five" class="card text-white bg-info col-1" style="">
-                    <div class="card-title"><!--fetch and push searched date--></div>
-                    <p id="five-symbol" class="card-text"></p>
-                    <p id="five-temp" class="card-text"><!--Temp--></p>
-                    <p id="five-hum" class="card-text"><!--Humidity--></p>
-                </div>
-            </section>
             </div>
         </section>      
     </section>
