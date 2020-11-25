@@ -35,12 +35,17 @@ function renderCities(list) {
     
     //iterate over list
     for (var i = 0; i < list.length; i++) {
-        var previousItem = $("<p>");
+        var previousItem = $("<p id='history-"+i+"' class='previous-search-item'>");
         previousItem.text(list[i]);
         previousItem.addClass("list-group list-group flush bg-light border text-center")
         $("#cityNames").append(previousItem);
     }
 }
+
+$("body").on("click", ".previous-search-item", function(event) {
+   var cityName= $(this).text();
+   forecastCityData(cityName);
+});
 
 $("#search-for").on("click", function(event) {
     event.preventDefault();
@@ -55,9 +60,14 @@ renderCities(list);
 
 //fetch and push forecast data
 
-function forecastData() {
+function forecastSearchData() {
     var searchTerm = document.getElementById("cityName").value;
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + searchTerm + "&units=imperial" + "&appid=" + appId)
+    forecastCityData(searchTerm);
+}
+
+function forecastCityData(city) {
+    document.getElementById("daily-forecast").innerHTML = "";
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + appId)
     .then(function(response) {
         return response.json();
     })
@@ -80,12 +90,9 @@ function forecastData() {
             for (var i = 0; i < fiveDayForecast.length; i++) {
                 renderFutureForecast(fiveDayForecast[i]);
             }
-            renderCurrentForecast(searchTerm, responseJson.current);
+            renderCurrentForecast(city, responseJson.current);
         })    
-    
-    })
-   
-    
+    })    
 }
 
 function renderCurrentForecast(namedCity, currentForecast) {
@@ -100,7 +107,19 @@ function renderCurrentForecast(namedCity, currentForecast) {
     cityTempEl.innerHTML = "<p>" + "Temperature: " + namedTemp + "&#176;F" + "</p>";
     cityHumidityEl.innerHTML = "<p>" + "Humidity: " + namedHumidity + "%" + "</p>";
     cityWindSpeedEl.innerHTML = "<p>" + "Wind Speed: " + namedWindSpeed + " MPH" + "</p>";
-    cityUvIndexEl.innerHTML = "<p>" + "UV Index: " + uvIndex + "</p>";
+    cityUvIndexEl.innerHTML = renderUvIndex(uvIndex);
+}
+
+function renderUvIndex(uvi) {
+    if(uvi <=5) {
+        return "<span class='badge badge-success'>" + "UV Index: " + uvi + "</span>";
+    }
+    else if(uvi <=7) {
+        return "<span class='badge badge-warning'>" + "UV Index: " + uvi + "</span>";
+    }
+    else {
+        return "<span class='badge badge-danger'>" + "UV Index: " + uvi + "</span>";
+    }
 }
 
 function renderFutureForecast(futureForecast) {
